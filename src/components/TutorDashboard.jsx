@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Card, CardContent } from './ui/card';
-import { Button } from './ui/button';
-import { Music, LogOut, Plus } from 'lucide-react';
-import { CreateAdvertisement } from './CreateAdvertisement';
+import { useState } from "react";
+import { Card, CardContent } from "./ui/card";
+import { Button } from "./ui/button";
+import { Music, LogOut, Plus } from "lucide-react";
+import { CreateAdvertisement } from "./CreateAdvertisement";
 
 export function TutorDashboard({ onLogout, onCreateAdvertisement }) {
   const [showCreateForm, setShowCreateForm] = useState(false);
@@ -52,7 +52,8 @@ export function TutorDashboard({ onLogout, onCreateAdvertisement }) {
                 <Music className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
                 <h3 className="mb-2">No advertisements yet</h3>
                 <p className="text-muted-foreground mb-6">
-                  Create your first advertisement to start connecting with students
+                  Create your first advertisement to start connecting with
+                  students
                 </p>
                 <Button onClick={() => setShowCreateForm(true)}>
                   <Plus className="w-4 h-4 mr-2" />

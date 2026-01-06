@@ -1,10 +1,18 @@
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
-import { Checkbox } from './ui/checkbox';
-import { Label } from './ui/label';
-import { Separator } from './ui/separator';
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Button } from "./ui/button";
+import { Checkbox } from "./ui/checkbox";
+import { Label } from "./ui/label";
+import { Separator } from "./ui/separator";
 
-const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const daysOfWeek = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
 
 export function FilterPanel({
   selectedInstruments,
@@ -18,7 +26,7 @@ export function FilterPanel({
 }) {
   const handleInstrumentToggle = (instrument) => {
     if (selectedInstruments.includes(instrument)) {
-      onInstrumentChange(selectedInstruments.filter(i => i !== instrument));
+      onInstrumentChange(selectedInstruments.filter((i) => i !== instrument));
     } else {
       onInstrumentChange([...selectedInstruments, instrument]);
     }
@@ -26,7 +34,7 @@ export function FilterPanel({
 
   const handleSuburbToggle = (suburb) => {
     if (selectedSuburbs.includes(suburb)) {
-      onSuburbChange(selectedSuburbs.filter(s => s !== suburb));
+      onSuburbChange(selectedSuburbs.filter((s) => s !== suburb));
     } else {
       onSuburbChange([...selectedSuburbs, suburb]);
     }
@@ -34,7 +42,7 @@ export function FilterPanel({
 
   const handleDayToggle = (day) => {
     if (selectedDays.includes(day)) {
-      onDayChange(selectedDays.filter(d => d !== day));
+      onDayChange(selectedDays.filter((d) => d !== day));
     } else {
       onDayChange([...selectedDays, day]);
     }
@@ -46,9 +54,10 @@ export function FilterPanel({
     onDayChange([]);
   };
 
-  const hasActiveFilters = selectedInstruments.length > 0 || 
-                          selectedSuburbs.length > 0 || 
-                          selectedDays.length > 0;
+  const hasActiveFilters =
+    selectedInstruments.length > 0 ||
+    selectedSuburbs.length > 0 ||
+    selectedDays.length > 0;
 
   return (
     <Card>
@@ -67,7 +76,7 @@ export function FilterPanel({
         <div>
           <h3 className="mb-3">Instruments</h3>
           <div className="space-y-2">
-            {availableInstruments.map(instrument => (
+            {availableInstruments.map((instrument) => (
               <div key={instrument} className="flex items-center space-x-2">
                 <Checkbox
                   id={`instrument-${instrument}`}
@@ -91,17 +100,14 @@ export function FilterPanel({
         <div>
           <h3 className="mb-3">Location</h3>
           <div className="space-y-2">
-            {availableSuburbs.map(suburb => (
+            {availableSuburbs.map((suburb) => (
               <div key={suburb} className="flex items-center space-x-2">
                 <Checkbox
                   id={`suburb-${suburb}`}
                   checked={selectedSuburbs.includes(suburb)}
                   onCheckedChange={() => handleSuburbToggle(suburb)}
                 />
-                <Label
-                  htmlFor={`suburb-${suburb}`}
-                  className="cursor-pointer"
-                >
+                <Label htmlFor={`suburb-${suburb}`} className="cursor-pointer">
                   {suburb}
                 </Label>
               </div>
@@ -115,17 +121,14 @@ export function FilterPanel({
         <div>
           <h3 className="mb-3">Availability</h3>
           <div className="space-y-2">
-            {daysOfWeek.map(day => (
+            {daysOfWeek.map((day) => (
               <div key={day} className="flex items-center space-x-2">
                 <Checkbox
                   id={`day-${day}`}
                   checked={selectedDays.includes(day)}
                   onCheckedChange={() => handleDayToggle(day)}
                 />
-                <Label
-                  htmlFor={`day-${day}`}
-                  className="cursor-pointer"
-                >
+                <Label htmlFor={`day-${day}`} className="cursor-pointer">
                   {day}
                 </Label>
               </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -6,15 +6,15 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from './ui/dialog';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { Mail, Lock } from 'lucide-react';
+} from "./ui/dialog";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+import { Mail, Lock } from "lucide-react";
 
 export function LoginModal({ onClose, onLogin }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,7 +30,8 @@ export function LoginModal({ onClose, onLogin }) {
         <DialogHeader>
           <DialogTitle>Tutor Login</DialogTitle>
           <DialogDescription>
-            Sign in to your tutor account to manage your profile and advertisements.
+            Sign in to your tutor account to manage your profile and
+            advertisements.
           </DialogDescription>
         </DialogHeader>
 

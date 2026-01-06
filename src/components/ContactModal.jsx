@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -6,37 +6,39 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from './ui/dialog';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { Textarea } from './ui/textarea';
+} from "./ui/dialog";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+import { Textarea } from "./ui/textarea";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from './ui/select';
+} from "./ui/select";
 
 export function ContactModal({ tutor, onClose }) {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    instrument: '',
-    message: '',
+    name: "",
+    email: "",
+    phone: "",
+    instrument: "",
+    message: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // In a real app, this would send the message
-    alert(`Message sent to ${tutor.name}!\n\nYour details:\nName: ${formData.name}\nEmail: ${formData.email}\nInstrument: ${formData.instrument}`);
+    alert(
+      `Message sent to ${tutor.name}!\n\nYour details:\nName: ${formData.name}\nEmail: ${formData.email}\nInstrument: ${formData.instrument}`
+    );
     onClose();
   };
 
   const handleChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   return (
@@ -45,7 +47,8 @@ export function ContactModal({ tutor, onClose }) {
         <DialogHeader>
           <DialogTitle>Contact {tutor.name}</DialogTitle>
           <DialogDescription>
-            Send a message to inquire about music lessons. They'll get back to you soon!
+            Send a message to inquire about music lessons. They'll get back to
+            you soon!
           </DialogDescription>
         </DialogHeader>
 
@@ -55,7 +58,7 @@ export function ContactModal({ tutor, onClose }) {
             <Input
               id="name"
               value={formData.name}
-              onChange={(e) => handleChange('name', e.target.value)}
+              onChange={(e) => handleChange("name", e.target.value)}
               placeholder="John Doe"
               required
             />
@@ -67,7 +70,7 @@ export function ContactModal({ tutor, onClose }) {
               id="email"
               type="email"
               value={formData.email}
-              onChange={(e) => handleChange('email', e.target.value)}
+              onChange={(e) => handleChange("email", e.target.value)}
               placeholder="john@example.com"
               required
             />
@@ -79,19 +82,23 @@ export function ContactModal({ tutor, onClose }) {
               id="phone"
               type="tel"
               value={formData.phone}
-              onChange={(e) => handleChange('phone', e.target.value)}
+              onChange={(e) => handleChange("phone", e.target.value)}
               placeholder="0412 345 678"
             />
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="instrument">Instrument of Interest *</Label>
-            <Select value={formData.instrument} onValueChange={(value) => handleChange('instrument', value)} required>
+            <Select
+              value={formData.instrument}
+              onValueChange={(value) => handleChange("instrument", value)}
+              required
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Select an instrument" />
               </SelectTrigger>
               <SelectContent>
-                {tutor.instruments.map(instrument => (
+                {tutor.instruments.map((instrument) => (
                   <SelectItem key={instrument} value={instrument}>
                     {instrument}
                   </SelectItem>
@@ -105,7 +112,7 @@ export function ContactModal({ tutor, onClose }) {
             <Textarea
               id="message"
               value={formData.message}
-              onChange={(e) => handleChange('message', e.target.value)}
+              onChange={(e) => handleChange("message", e.target.value)}
               placeholder="Tell the tutor about your experience level and what you'd like to learn..."
               rows={4}
               required

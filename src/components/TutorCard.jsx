@@ -1,7 +1,7 @@
-import { Card, CardContent, CardFooter } from './ui/card';
-import { Badge } from './ui/badge';
-import { Button } from './ui/button';
-import { MapPin, Star, Clock, DollarSign } from 'lucide-react';
+import { Card, CardContent, CardFooter } from "./ui/card";
+import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+import { MapPin, Star, Clock, DollarSign } from "lucide-react";
 
 export function TutorCard({ tutor, onContact }) {
   return (
@@ -26,7 +26,9 @@ export function TutorCard({ tutor, onContact }) {
             <div className="flex items-center gap-1">
               <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
               <span className="font-medium">{tutor.rating}</span>
-              <span className="text-sm text-muted-foreground">({tutor.totalReviews})</span>
+              <span className="text-sm text-muted-foreground">
+                ({tutor.totalReviews})
+              </span>
             </div>
           </div>
 
@@ -38,7 +40,7 @@ export function TutorCard({ tutor, onContact }) {
             <div>
               <p className="text-sm font-medium mb-2">Instruments</p>
               <div className="flex flex-wrap gap-2">
-                {tutor.instruments.map(instrument => (
+                {tutor.instruments.map((instrument) => (
                   <Badge key={instrument} variant="secondary">
                     {instrument}
                   </Badge>
@@ -60,10 +62,7 @@ export function TutorCard({ tutor, onContact }) {
         </div>
       </CardContent>
       <CardFooter className="p-6 pt-0">
-        <Button 
-          onClick={() => onContact(tutor)} 
-          className="w-full"
-        >
+        <Button onClick={() => onContact(tutor)} className="w-full">
           Contact Tutor
         </Button>
       </CardFooter>

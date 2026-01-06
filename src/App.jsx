@@ -1,29 +1,29 @@
-import { useState, useMemo } from 'react';
-import { mockTutors as initialMockTutors } from './data/mockTutors';
-import { FilterPanel } from './components/FilterPanel';
-import { TutorCard } from './components/TutorCard';
-import { ContactModal } from './components/ContactModal';
-import { LoginModal } from './components/LoginModal';
-import { TutorDashboard } from './components/TutorDashboard';
-import { Card, CardContent } from './components/ui/card';
-import { Button } from './components/ui/button';
-import { Input } from './components/ui/input';
+import { useState, useMemo } from "react";
+import { mockTutors as initialMockTutors } from "./data/mockTutors";
+import { FilterPanel } from "./components/FilterPanel";
+import { TutorCard } from "./components/TutorCard";
+import { ContactModal } from "./components/ContactModal";
+import { LoginModal } from "./components/LoginModal";
+import { TutorDashboard } from "./components/TutorDashboard";
+import { Card, CardContent } from "./components/ui/card";
+import { Button } from "./components/ui/button";
+import { Input } from "./components/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from './components/ui/select';
-import { Music, Search, LogIn } from 'lucide-react';
+} from "./components/ui/select";
+import { Music, Search, LogIn } from "lucide-react";
 
 export default function App() {
   const [tutors, setTutors] = useState(initialMockTutors);
   const [selectedInstruments, setSelectedInstruments] = useState([]);
   const [selectedSuburbs, setSelectedSuburbs] = useState([]);
   const [selectedDays, setSelectedDays] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [sortBy, setSortBy] = useState('rating');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState("rating");
   const [selectedTutor, setSelectedTutor] = useState(null);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -48,27 +48,27 @@ export default function App() {
   // Get unique instruments and suburbs from all tutors
   const availableInstruments = useMemo(() => {
     const instruments = new Set();
-    tutors.forEach(tutor => {
-      tutor.instruments.forEach(instrument => instruments.add(instrument));
+    tutors.forEach((tutor) => {
+      tutor.instruments.forEach((instrument) => instruments.add(instrument));
     });
     return Array.from(instruments).sort();
   }, [tutors]);
 
   const availableSuburbs = useMemo(() => {
     const suburbs = new Set();
-    tutors.forEach(tutor => suburbs.add(tutor.suburb));
+    tutors.forEach((tutor) => suburbs.add(tutor.suburb));
     return Array.from(suburbs).sort();
   }, [tutors]);
 
   // Filter tutors based on selected criteria
   const filteredTutors = useMemo(() => {
-    return tutors.filter(tutor => {
+    return tutors.filter((tutor) => {
       // Filter by search query
       if (searchQuery.trim()) {
         const query = searchQuery.toLowerCase();
         const matchesName = tutor.name.toLowerCase().includes(query);
         const matchesBio = tutor.bio.toLowerCase().includes(query);
-        const matchesInstrument = tutor.instruments.some(inst => 
+        const matchesInstrument = tutor.instruments.some((inst) =>
           inst.toLowerCase().includes(query)
         );
         if (!matchesName && !matchesBio && !matchesInstrument) return false;
@@ -76,7 +76,7 @@ export default function App() {
 
       // Filter by instruments
       if (selectedInstruments.length > 0) {
-        const hasMatchingInstrument = tutor.instruments.some(instrument =>
+        const hasMatchingInstrument = tutor.instruments.some((instrument) =>
           selectedInstruments.includes(instrument)
         );
         if (!hasMatchingInstrument) return false;
@@ -89,7 +89,7 @@ export default function App() {
 
       // Filter by availability
       if (selectedDays.length > 0) {
-        const hasMatchingDay = tutor.availability.some(day =>
+        const hasMatchingDay = tutor.availability.some((day) =>
           selectedDays.includes(day)
         );
         if (!hasMatchingDay) return false;
@@ -102,15 +102,15 @@ export default function App() {
   // Sort tutors
   const sortedTutors = useMemo(() => {
     const tutorsCopy = [...filteredTutors];
-    
+
     switch (sortBy) {
-      case 'rating':
+      case "rating":
         return tutorsCopy.sort((a, b) => b.rating - a.rating);
-      case 'price-low':
+      case "price-low":
         return tutorsCopy.sort((a, b) => a.hourlyRate - b.hourlyRate);
-      case 'price-high':
+      case "price-high":
         return tutorsCopy.sort((a, b) => b.hourlyRate - a.hourlyRate);
-      case 'experience':
+      case "experience":
         return tutorsCopy.sort((a, b) => b.experience - a.experience);
       default:
         return tutorsCopy;
@@ -189,8 +189,12 @@ export default function App() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="rating">Highest Rated</SelectItem>
-                    <SelectItem value="price-low">Price: Low to High</SelectItem>
-                    <SelectItem value="price-high">Price: High to Low</SelectItem>
+                    <SelectItem value="price-low">
+                      Price: Low to High
+                    </SelectItem>
+                    <SelectItem value="price-high">
+                      Price: High to Low
+                    </SelectItem>
                     <SelectItem value="experience">Most Experienced</SelectItem>
                   </SelectContent>
                 </Select>
@@ -199,7 +203,8 @@ export default function App() {
 
             <div className="mb-6">
               <h2>
-                {sortedTutors.length} {sortedTutors.length === 1 ? 'tutor' : 'tutors'} found
+                {sortedTutors.length}{" "}
+                {sortedTutors.length === 1 ? "tutor" : "tutors"} found
               </h2>
             </div>
 
@@ -215,8 +220,12 @@ export default function App() {
               </Card>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {sortedTutors.map(tutor => (
-                  <TutorCard key={tutor.id} tutor={tutor} onContact={setSelectedTutor} />
+                {sortedTutors.map((tutor) => (
+                  <TutorCard
+                    key={tutor.id}
+                    tutor={tutor}
+                    onContact={setSelectedTutor}
+                  />
                 ))}
               </div>
             )}
@@ -226,12 +235,18 @@ export default function App() {
 
       {/* Contact Modal */}
       {selectedTutor && (
-        <ContactModal tutor={selectedTutor} onClose={() => setSelectedTutor(null)} />
+        <ContactModal
+          tutor={selectedTutor}
+          onClose={() => setSelectedTutor(null)}
+        />
       )}
 
       {/* Login Modal */}
       {showLoginModal && (
-        <LoginModal onClose={() => setShowLoginModal(false)} onLogin={handleLogin} />
+        <LoginModal
+          onClose={() => setShowLoginModal(false)}
+          onLogin={handleLogin}
+        />
       )}
     </div>
   );
